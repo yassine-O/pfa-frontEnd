@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RegisterForm } from '../register-form';
 import { HttpClient} from '@angular/common/http';
 import {Token} from '../token';
+
 
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   errorLogin:string=""
   username:string="";
   password:String="";
+  @Output() logginEvent=new EventEmitter()
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class LoginComponent implements OnInit {
       let token: Token = new Token();
       let jwtToken = token.extract(data, "jwt");
       token.saveToken(jwtToken, "token")
-
+      this.logginEvent.emit();
 
     },
       error => {
