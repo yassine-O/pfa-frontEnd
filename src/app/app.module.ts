@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './sign-in-up/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { GrhUiComponent } from './grh-ui/grh-ui.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    GrhUiComponent,
   ],
   imports: [
     BrowserModule,
