@@ -1,0 +1,13 @@
+<header >
+   
+    <ul *ngIf="headerElement!=[]">
+        <li class="h1"> PFA</li>
+        <li *ngFor="let element of headerElement">
+            <a [routerLink]="element">{{element}}</a>
+         
+            
+        </li>
+       
+    </ul>
+   
+</header>

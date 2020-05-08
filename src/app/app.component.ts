@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'pfa-frontEnd';
+  role="grh";
   logged:boolean=false//if the user is logged 
   constructor(private route:Router,
               private http:HttpClient){

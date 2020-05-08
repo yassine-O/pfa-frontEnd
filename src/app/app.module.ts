@@ -6,6 +6,8 @@ import { LoginComponent } from './sign-in-up/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HelloComponent } from './hello/hello.component';
+import { HeaderComponent } from './header/header.component';
+import { AnnonceComponent } from './grh/annonce/annonce.component';
 const routes: Routes = [
   
   {
@@ -27,6 +29,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    HeaderComponent,
+    AnnonceComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+header{
+    display:flex;
+    background: blue;
+    margin:0;
+    
+    justify-content: space-between;
+}
+header ul{
+    display:flex;
+    justify-content: space-between;
+    list-style: none;
+    font-size: large;
+    width:90%;
+    margin: 1em;
+    padding: 0;
+   
+   
+}
+.h1{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+
+ul a{
+    color:white;
+    font-weight: bold;
+    border:none;
+}
+ul h1{
+    margin:1em 0.5em;
+}
+li button{
+    color:white;
+    font-weight: bold;
+    font-weight: 900;
+}
