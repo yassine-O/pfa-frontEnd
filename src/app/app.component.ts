@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'pfa-frontEnd';
   role="grh";
-  logged:boolean=false//if the user is logged 
+  logged:boolean=true//true to disable security
   constructor(private route:Router,
               private http:HttpClient){
    
