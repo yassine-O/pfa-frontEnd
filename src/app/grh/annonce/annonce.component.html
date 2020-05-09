@@ -1,1 +1,111 @@
-<p>annonce works!</p>
+<section class="articles py-4">
+    <div class="container">
+        <div class="ghaction  row mb-3 ">
+            <div class="col-lg-8">
+                <div class="row ml-0">
+                    <div class="col-md-5 ml-0">
+                        <button class="btn btn-link">
+                            add annonce
+                        </button>
+                        <button class="btn btn-link">
+                            sort by date
+                        </button>
+                    </div>
+                    <input class="col-sm-6 col-md-4">
+                    
+                <button class="btn-success col-sm-2 col-md-2  ml-0 mr-0">search</button>
+                </div>
+               
+                
+            </div>
+               
+                
+               
+        </div>
+        <div class="row">
+            <div class="col-lg-8 "> 
+                    <div class="article mb-3 shadow" 
+                            *ngFor="let annonce of annonces">
+                        <div class="row">
+                            <div style="margin:auto;"class="col-md-3 info"> 
+                                    <p style="text-align: center;"><strong> Contrat:</strong> {{annonce.typeDeContrat}}</p>
+                                    <p style="text-align: center;"> <strong>salaire:</strong>{{annonce.salaireMin}}-{{annonce.salaireMax}}</p>
+                                    <p style="text-align: center;"> <strong>ville :</strong>{{annonce.ville}}</p>
+                            </div>
+                            <div class="col-md-9">
+                                <strong> {{annonce.title}}</strong>
+                                    <a class=" fa py-4 w-100">
+                                        <i class="fas fa-calendar"></i> {{annonce.date}}
+                                    </a>
+                                <p> {{annonce.description}} <a routerLink="annonce/{{annonce.id}}"> more detail</a></p>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+            <div class="col-lg-4  "> 
+                    <div class=" img-fluid w-100">
+                        <img src="assets/hire.jpg">                         
+                     </div>
+                    <div class="img img-fluid">
+                        <img src="assets/hire.jpg"> 
+                    </div>
+                    <!-- social networks -->
+                    <div class="row ">
+                            <div class="col-sm-4 text-center">
+                                <a class=" fa social-link py-4 w-100">
+                                    <i class="fab fa-facebook-official"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                               
+                                <a class=" fa social-link py-4 w-100">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <a class="fa social-link py-4 w-100">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                
+                            </div>
+                    </div>
+                    <div class="badge w-100">
+                        <p class="badge-link text-center">
+                            <a> Web Development</a>
+                        </p>
+                        <p>
+                            <a> web design</a>
+                        </p>
+                        <p>
+                            <a> ingenieur electrique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> environnement</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+
+                    </div>
+                    
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

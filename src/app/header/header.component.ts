@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   headerElement:string[];
-  @Input()role:string;  
+  @Input()role:string;  zed
   constructor() { }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './sign-in-up/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,6 +8,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HelloComponent } from './hello/hello.component';
 import { HeaderComponent } from './header/header.component';
 import { AnnonceComponent } from './grh/annonce/annonce.component';
+import { AddAnnonceComponent } from './grh/annonce/add-annonce/add-annonce.component';
+import { FooterComponent } from './footer/footer.component';
 const routes: Routes = [
   
   {
@@ -19,8 +21,16 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: { title: 'Login' }
+  },
+  {
+    path:"Annonce",
+    component:AnnonceComponent,
+    
+  },
+  {
+    path:"addAnnonce",
+    component:AddAnnonceComponent
   }
-  
 ];
 
 
@@ -31,13 +41,16 @@ const routes: Routes = [
     LoginComponent,
     HeaderComponent,
     AnnonceComponent,
+    AddAnnonceComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
   
     HttpClientModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

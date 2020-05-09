@@ -1,13 +1,31 @@
-<header >
-   
-    <ul *ngIf="headerElement!=[]">
+<header>
+
+    <!-- <ul *ngIf="headerElement!=[]">
         <li class="h1"> PFA</li>
         <li *ngFor="let element of headerElement">
             <a [routerLink]="element">{{element}}</a>
-         
-            
+
+
         </li>
-       
-    </ul>
+
+    </ul> -->
    
+    <nav class="navbar navbar-expand-xsm navbar-light bg-light ">
+        <a class="navbar-brand text-center" href="#" style="position: absolute;left: 50%;transform: translateX(-50%);" >PFA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li *ngFor="let element of headerElement">
+                    <a [routerLink]="element">{{element}}</a>
+        
+        
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 </header>
