@@ -10,6 +10,9 @@ import { HeaderComponent } from './header/header.component';
 import { AnnonceComponent } from './grh/annonce/annonce.component';
 import { AddAnnonceComponent } from './grh/annonce/add-annonce/add-annonce.component';
 import { FooterComponent } from './footer/footer.component';
+import { VideosComponent } from './grh/videos/videos.component';
+import { AddQuestionComponent } from './grh/videos/add-question/add-question.component';
+import { RecordVideoComponent } from './grh/videos/record-video/record-video.component';
 const routes: Routes = [
   
   {
@@ -43,6 +46,9 @@ const routes: Routes = [
     AnnonceComponent,
     AddAnnonceComponent,
     FooterComponent,
+    VideosComponent,
+    AddQuestionComponent,
+    RecordVideoComponent,
   ],
   imports: [
     BrowserModule,

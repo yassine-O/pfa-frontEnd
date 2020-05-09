@@ -1,0 +1,34 @@
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">adding videos</h1>
+        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la
+            mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années
+            1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de
+            polices de texte...</p>
+    </div>
+</section>
+<div class="container ">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-3 ">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
+                </div>
+                <ul class="list-group category_block">
+                    <li class="list-group-item" *ngFor="let category of categories"><a href="#">{{category}} </a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 ">
+            <form>
+                <div class="form-group text-center">
+                    <label><strong>choose a categorie</strong> </label>
+                    <input class="form-control diabled" readonly>
+                </div>
+               <div class="text-center">
+                   <button class="btn btn-success w-50"> start recording </button>
+               </div>
+            </form>
+        </div>
+    </div>
+</div>

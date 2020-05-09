@@ -6,7 +6,7 @@
         <div style="margin: 0;"*ngIf="logged">
             <app-header [role]="role"></app-header>
             <router-outlet> </router-outlet>
-            <app-footer></app-footer>
+            <app-videos></app-videos>
         </div>
         <div *ngIf="!logged">
             <app-login (logginEvent)="loggedIn()"></app-login>
