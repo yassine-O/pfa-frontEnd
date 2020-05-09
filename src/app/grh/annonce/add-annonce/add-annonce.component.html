@@ -1,0 +1,146 @@
+<form #templateVariableName="ngForm">
+
+</form>
+<form #annonceForm="ngForm" (ngSubmit)="saveAnnonce" class="container mt-4 text-center" style="margin-bottom: 4em;">
+
+    <h4 class="text-center"> create annonce</h4>
+    <div class="form-group">
+
+        <input [(ngModel)]="annonce.title" #title="ngModel" class="form-control" placeholder="Title" name="title"
+            required>
+
+        <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div class="alert alert-danger" *ngIf="title.errors.required"> required please</div>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label> Description</label>
+        <textarea required #description="ngModel" name="description" [(ngModel)]="annonce.description"
+            class="form-control"></textarea>
+
+        <div *ngIf="description.invalid&& (description.dirty || description.touched)">
+            <div class="alert alert-danger" *ngIf="description.errors.required"> required please</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label> Profile recherché</label>
+        <textarea #profileRecherche="ngModel" [(ngModel)]="annonce.profileRecherche" name="profileRecherche" required
+            class="form-control"></textarea>
+        <div *ngIf="profileRecherche.invalid &&(profileRecherche.touched||profileRecherche.dirty)">
+            <div class="alert alert-danger" *ngIf="profileRecherche.errors.required">required
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label> Avantages</label>
+        <textarea name="avantages" #avantages="ngModel" [(ngModel)]="annonce.avantages" required
+            class="form-control"></textarea>
+        <div *ngIf="avantages.invalid&&(avantages.dirty||avantages.touched)">
+            <div class="alert alert-danger" *ngIf="avantages.errors.required">
+                required
+            </div>
+        </div>
+    </div>
+    <div class="form-row mb-4">
+        <div class="col">
+            <input class="form-control" name="typeDeContrat" #typeDeContrat="ngModel"
+                [(ngModel)]="annonce.typeDeContrat" required placeholder="type de contrat">
+            <div *ngIf="typeDeContrat.invalid&&(typeDeContrat.dirty||typeDeContrat.touched)">
+                <div *ngIf="typeDeContrat.errors.required" class="alert alert-danger">
+                    required
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col">
+            <input #niveauEtude="ngModel" [(ngModel)]="annonce.niveauEtude" name="niveauEtude" class="form-control"
+                required placeholder="niveau d'étude">
+            <div *ngIf="niveauEtude.invalid&&(niveauEtude.touched||niveauEtude.dirty)">
+                <div class="alert alert-danger" *ngIf="niveauEtude.errors.required">
+                    required
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <input name="salaireMin" #salaireMin="ngModel" [(ngModel)]="annonce.salaireMin"
+                [required]="!annonce.salaireMax" pattern="[0-9]*" type="text" class="form-control"
+                placeholder="Salaire Min">
+
+            <div *ngIf="salaireMin.invalid&&(salaireMin.dirty||salaireMin.touched)">
+                <div class="alert alert-danger" *ngIf="salaireMin.errors.required">
+                    u must specify at least salaireMin ou salaireMax
+                </div>
+                <div class="alert alert-danger" *ngIf="salaireMin.errors.pattern">
+                    salaire est un nombre
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col">
+            <input type="text" class="form-control" name="salaireMax" #salaireMax="ngModel" pattern="[0-9]*"
+                [(ngModel)]="annonce.salaireMax" [required]="!annonce.salaireMin" placeholder="Salaire Max">
+            <div *ngIf="salaireMax.invalid&&(salaireMax.dirty||salaireMax.touched)">
+                <div class="alert alert-danger" *ngIf="salaireMax.errors.required">
+                    u must specify at least salaireMin or salaireMax
+                </div>
+                <div class="alert alert-danger" *ngIf="salaireMax.errors.pattern">
+                    salaire est un nombre
+                </div>
+
+
+            </div>
+            <div 
+            class="alert alert-danger"
+            *ngIf="(annonce.salaireMin>annonce.salaireMax)&&!(salaireMin.errors&&salaireMax.errors)">
+                salaire max must be greater than salaire min
+            </div>
+           
+        
+    </div>
+
+
+
+    </div>
+    <div class="form-row mb-4">
+        <div class="col">
+            <input name="nomDeSociete" [(ngModel)]="annonce.nomDeSociete" #nomDeSociete="ngModel" class="form-control"
+                placeholder="nom Societé" required>
+            <div *ngIf="nomDeSociete.invalid&&(nomDeSociete.dirty||nomDeSociete.touched)">
+                <div class="alert alert-danger" *ngIf="nomDeSociete.errors.required">
+                    required
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <input name="ville" [(ngModel)]="annonce.ville" #ville="ngModel" class="form-control" required
+                placeholder="ville">
+            <div *ngIf="ville.invalid&&(ville.dirty||ville.touched)">
+                <div class="alert alert-danger" *ngIf="ville.errors.required">
+                    required
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <button class="btn btn-success w-50 m-auto p-auto " (click)="saveAnnonce()" [disabled]="annonceForm.invalid || (annonce.salaireMin>annonce.salaireMax||(!annonce.salaireMin&&!annonce.salaireMax))"> create
+        annonce</button>
+
+
+
+
+   
+
+</form>
