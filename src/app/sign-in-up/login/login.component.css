@@ -1,0 +1,98 @@
+header{
+    display: flex;
+    background:#3F5C99;
+    justify-content: space-between;
+    width:100%
+    
+}
+header div{
+   
+    padding: 0.5em 0.5em;
+    color:white;
+
+}
+ header input{
+    width:12em;
+} 
+header button{
+   
+    background:#415E9B;
+    color:white;
+    border-color: #415D9A;
+    margin-right: 1em;
+    
+}
+
+.login{
+    display: flex;
+    padding: 0 ;
+    margin-right: 10em;
+}
+header h1{
+    margin :auto;
+    margin-left: 1em;
+    margin-top: 1.2em;
+    color:white;
+    font-size: xx-large;
+    
+    
+}
+.section2{
+    display: flex;
+    
+}
+.section2 div{
+    width: 100%;
+    margin: 1em;
+}
+h2{
+    
+}
+@media (max-width: 640px){
+   
+    header,
+    .section2,
+    .login{
+        display: block; 
+    }
+    header{
+        background: #E9EBEE; ;
+        padding: 0;
+    }
+    .login{
+        text-align: center;
+        margin:0;
+        text-align: center;
+       
+    }
+    .login label{
+        color:black
+    }
+
+    header h1{
+        background: #3F5C99;
+        margin :0;
+        text-align: center;
+
+
+    }
+    .login div{
+        width:90%;
+        margin: 0;
+    }
+    .login input,
+    .login button,
+    .login label {
+        display:block;
+        width: 100%;
+       
+        
+    }
+    .login label {
+        margin: 0;
+        text-align: start;
+       
+        
+    }
+
+}
