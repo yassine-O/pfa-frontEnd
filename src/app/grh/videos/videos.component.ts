@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Video } from './video';
+import { Category } from './category';
 
 @Component({
   selector: 'app-videos',
@@ -7,7 +8,7 @@ import { Video } from './video';
   styleUrls: ['./videos.component.css']
 })
 export class VideosComponent implements OnInit {
-  categories:string[];
+  categories:Category[];
   videos:Video[];
   page=1;
   nombreVideo=30;
@@ -39,15 +40,62 @@ export class VideosComponent implements OnInit {
     this.videos.push(video);
     this.videos.push(video);
     this.videos.push(video);
-    this.categories.push("programming");
-    this.categories.push("stages");
-    this.categories.push("parascolaire");
-    this.categories.push("vie personnel");
-    this.categories.push("future")
-    this.categories.push("vie personnel");
+    this.categories=[];
+    let c1=new Category();
+    let c2=new Category();
+    let c3=new Category();
+    c1.libelle="programming";
+    c1.id=1;
+    c2.libelle="finance";
+    c2.id=2;
+    c3.libelle="marketing"
+    c3.id=3;
+    c1.libelle="programming";
+    c1.id=1;
+    c2.libelle="finance";
+    c2.id=2;
+    c3.libelle="marketing"
+    c3.id=3;
+    c1.libelle="programming";
+    c1.id=1;
+    c2.libelle="finance";
+    c2.id=2;
+    c3.libelle="marketing"
+    c3.id=3;
+    c1.libelle="programming";
+    c1.id=1;
+    c2.libelle="finance";
+    c2.id=2;
+    c3.libelle="marketing"
+    c3.id=3;
+    c1.libelle="programming";
+    c1.id=1;
+    c2.libelle="finance";
+    c2.id=2;
+    c3.libelle="marketing"
+    c3.id=3;
+    c1.libelle="programming";
+    c1.id=1;
+    c2.libelle="finance";
+    c2.id=2;
+    c3.libelle="marketing"
+    c3.id=3;
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
+    this.categories.push(c1,c2,c3);
    }
 
   ngOnInit(): void {
+  }
+  catSelected(cat){
+      console.log(cat)
   }
 
 }

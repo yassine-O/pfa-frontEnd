@@ -23,10 +23,13 @@
         <div class="col-12 col-sm-12 col-md-3">
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
-                <ul class="list-group category_block">
-                    <li class="list-group-item" *ngFor="let category of categories"><a href="#">{{category}} </a></li>
+                <select class="form-control category_block" size=7>
+                    <option class="form-control" value={{category.id}} *ngFor="let category of categories"
+                    (click)="catSelected(category.id)"
                     
-                </ul>
+                    >{{category.libelle}}</option>
+                    
+                </select>
             </div>
             <div class="card bg-light mb-3">
                 <div class="card-header ">
