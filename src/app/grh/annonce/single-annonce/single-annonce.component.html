@@ -1,0 +1,117 @@
+<div *ngIf="!loading">
+    <div class=" bg-dark text-white">
+        <div class="container pt-4">
+            <h1 class="jumbotron-heading text-center pb-4 ">{{annonce.title}}</h1>
+            <p *ngIf="role=='candidat'" class="text-center pb-4 ">
+                <button class="button btn-primary"
+                    style="background: #E76057; border: none;border-top-left-radius: 16px;border-bottom-left-radius: 16px;border-top-right-radius: 16px;border-bottom-right-radius: 16px;padding:1em 5em;">
+                    Postuler</button>
+            </p>
+            <div *ngIf="role=='grh'" class="text-center pb-4 row">
+                <div class="col-lg-4 mb-4 text-center">
+                    <button class="button btn-primary"
+                    (click)="updateAnnonce()"
+                        style="background: #E76057; border: none;border-top-left-radius: 16px;border-bottom-left-radius: 16px;border-top-right-radius: 16px;border-bottom-right-radius: 16px;padding:1em 5.3em; margin-right: 0;">
+                        Edit</button>
+                </div>
+                <div class="col-lg-4 text-center mb-4">
+                    <button  class="button btn-danger"
+                        style="border: none;border-top-left-radius: 16px;border-bottom-left-radius: 16px;border-top-right-radius: 16px;border-bottom-right-radius: 16px;padding:1em 4.5em;">
+                       add Test</button>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <button data-toggle="modal" data-target="#exampleModal" class="ml-4button btn-danger"
+                        style="border: none;border-top-left-radius: 16px;border-bottom-left-radius: 16px;border-top-right-radius: 16px;border-bottom-right-radius: 16px;padding:1em 5em;">
+                        Delete</button>
+                </div>
+            </div>
+            <a class=" fa ">
+                <i class="fas fa-calendar"></i> {{annonce.date|date}}
+            </a>
+        </div>
+    
+    </div>
+    <div class="container mt-4">
+        <div> Annonce detail</div>
+        <div style="border: 1px solid #e4e4e4;word-break:break-all;white-space: pre-wrap;">
+            <strong> profile Recherche  :</strong>{{annonce.profileRecherche}}<br><br>
+            <strong> Entreprise  :</strong>{{annonce.nomDeSociete}}<br><br>
+            <strong> Description</strong><br>
+            <div class="m-4">
+                {{annonce.description}}
+            </div>
+            <strong> avantages</strong><br>
+            <div class="m-4" style="word-break:break-all;white-space: pre-wrap;">
+                {{annonce.avantages}}
+            </div>
+            <strong> Type de contrat :</strong>{{annonce.typeDeContrat}}<br><br>
+            <strong> Niveau d'études  :</strong>{{annonce.niveauEtude}}<br><br>
+            <strong> ville  :</strong>{{annonce.ville}}<br><br>
+            <strong> salaire  :</strong>{{annonce.salaireMin}}-{{annonce.salaireMax}}<br><br>
+    
+        </div>
+        <!-- <div class="bg-success">
+            <div class="text-center">
+                <h2> {{annonce.title}}</h2>
+            </div>
+    
+            date:string
+            idAnnonce:number;
+    
+            profileRecherche:string;
+            avantages:string; 
+    
+    
+            <div>
+                <span> ville:{{annonce.ville}}</span>
+                <span> contrat: {{annonce.typeDeContrat}}</span>
+                <span> nom de societé{{annonce. nomDeSociete}}</span>
+            </div> 
+             <div>
+    
+                <span>Salaire {{annonce.salaireMin }}-{{annonce.salaireMax }}</span>
+                <span> niveau étude {{annonce. niveauEtude}}</span>
+                <span>
+                    profil: {{annonce.profileRecherche}}
+                 </span>
+            </div>
+            <div style="word-break:break-all;">
+                Description:<br>
+                {{annonce.description}}
+                <br>
+                white-space: pre-wrap;
+                <div style="white-space: pre-wrap;">
+                    avantages <br>
+                    {{annonce.avantages}}
+                </div>
+            </div>
+        </div> -->
+    
+    </div>
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">delete annonce</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" (click)="deleteAnnonce()"data-dismiss="modal" class="btn btn-primary">Confirm</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+</div>
+<div *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
