@@ -1,0 +1,22 @@
+<div class="bg-dark mb-4 w-100" style="height: 6em;">
+
+</div>
+<div class="row">
+    <div class="col-md-8">
+            <app-videos (videoSelected)="videoSelected($event)" [selectMode]=true></app-videos>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <h2> To create a test</h2>
+            <ul>
+                <li> select a catgory</li>
+                <li> select a questiony</li>
+                <li> drag question to sort questions </li>
+                
+            </ul>
+        </div>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let video of videos" cdkDrag>{{video.titre}} <button class="btn btn-link" (click)="remove()"><i class='fas fa-trash-alt'></i></button></div>
+          </div>
+    </div>
+</div>
