@@ -80,18 +80,18 @@
             </div>
             <div style="margin-top: 0;width:80%; display: flex;justify-content: space-between;">
                 <div style="margin-top: 0;">
-                    <input type="radio" name="role" (click)="onselectRole('candidat')" checked>
+                    <input type="radio" name="role" [(ngModel)]="registerForm.role" value="candidat"  checked>
                     Candidat
                 </div>
                 <div style="margin-top: 0;">
-                    <input type="radio" name="role" (click)="onselectRole('grh')">
+                    <input type="radio" name="role" value="grh" [(ngModel)]="registerForm.role" >
                     GRH
                 </div>
 
 
             </div>
             <div style="margin-top: 0;width:80%">
-                <button style="width:100%" class="btn btn-success" (click)="register()">
+                <button style="width:100%" class="btn btn-success" (click)= "register()" >
                     Register
                 </button>
             </div>

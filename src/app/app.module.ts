@@ -13,6 +13,12 @@ import { FooterComponent } from './footer/footer.component';
 import { VideosComponent } from './grh/videos/videos.component';
 import { AddQuestionComponent } from './grh/videos/add-question/add-question.component';
 import { RecoderComponent } from './grh/videos/recorder/recoder.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { SingleAnnonceComponent } from './grh/annonce/single-annonce/single-annonce.component';
+import { AddTestComponent } from './grh/annonce/add-test/add-test.component';
+
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 const routes: Routes = [
   
   {
@@ -33,7 +39,23 @@ const routes: Routes = [
   {
     path:"addAnnonce",
     component:AddAnnonceComponent
+  },
+  {
+    path:"",
+    pathMatch : 'full',
+    component:AnnonceComponent
+  },
+  {
+    path:"annonce/:id",
+    pathMatch:'full',
+    component:SingleAnnonceComponent
+  },
+  {
+    path:"addTest",
+    pathMatch:'full',
+    component:AddTestComponent
   }
+
 ];
 
 
@@ -48,7 +70,10 @@ const routes: Routes = [
     FooterComponent,
     VideosComponent,
     AddQuestionComponent,
-    RecoderComponent
+    RecoderComponent,
+    SpinnerComponent,
+    SingleAnnonceComponent,
+    AddTestComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +81,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

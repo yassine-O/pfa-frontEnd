@@ -11,20 +11,22 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'pfa-frontEnd';
   role="grh";
-  logged:boolean=true//true to disable security
+  logged:boolean=false
   constructor(private route:Router,
               private http:HttpClient){
    
   }
   ngOnInit(): void {
     let token=new Token().getToken("token");
-   let promise= this.http.post("http://localhost:8080/validate",token).toPromise()
+   let promise= this.http.post<boolean>("http://localhost:8080/validate",token).toPromise()
     promise.then(
       (data)=>{
-       this.logged=true;
+       this.logged=data;
+       console.log(data)
       }
     )
     promise.catch((err)=>{
+      
       console.log(err)
     })
   }

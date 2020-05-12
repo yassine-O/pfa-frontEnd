@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RegisterForm } from '../register-form';
 import { HttpClient} from '@angular/common/http';
 import {Token} from '../token';
+import { AuthenticationResponse } from './AuthenticationResponse.model';
 
 
 
@@ -26,13 +27,15 @@ export class LoginComponent implements OnInit {
       console.log(role);
   }
   register(){
+    
     console.log(this.registerForm)
-    this.http.post("http://localhost:8080/save",this.registerForm).subscribe(
+    this.http.post<AuthenticationResponse>("http://localhost:8080/save/"+this.registerForm.role,this.registerForm).subscribe(
       (data)=>{
         console.log(data)
         let token=new Token();
-        let jwt=token.extract(data,"token")//extract token from data
-        token.saveToken(jwt,"token");
+        //extract token from data
+        token.saveToken(data.jwt,"token");
+        console.log(data.role)
       },
       (error)=>{
           console.log(error);
@@ -50,13 +53,14 @@ export class LoginComponent implements OnInit {
   }
   login(cridentia) {
 
-    this.http.post('http://localhost:8080/authenticate', cridentia).subscribe(data => {
+    this.http.post<AuthenticationResponse>('http://localhost:8080/authenticate', cridentia).subscribe(data => {
       console.log(data);
 
       let token: Token = new Token();
-      let jwtToken = token.extract(data, "jwt");
-      token.saveToken(jwtToken, "token")
+     
+      token.saveToken(data.jwt, "token")
       this.logginEvent.emit();
+      console.log(data)
 
     },
       error => {
@@ -64,7 +68,7 @@ export class LoginComponent implements OnInit {
           this.errorLogin = error.error;
 
         }
-
+        console.log(error)
       })
   }
 }

@@ -16,11 +16,20 @@
     <div class="form-group">
 
         <label> Description</label>
-        <textarea required #description="ngModel" name="description" [(ngModel)]="annonce.description"
-            class="form-control"></textarea>
+        <textarea 
+            style="white-space: pre-wrap;"
+            required 
+            #description="ngModel" 
+            name="description"
+            [(ngModel)]="annonce.description"
+            class="form-control"
+            minlength=247
+        >
+        </textarea>
 
         <div *ngIf="description.invalid&& (description.dirty || description.touched)">
             <div class="alert alert-danger" *ngIf="description.errors.required"> required please</div>
+            <div class="alert alert-danger" *ngIf="description.errors.minlength"> at least 247 carecters</div>
         </div>
     </div>
     <div class="form-group">

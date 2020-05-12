@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Video } from './video';
 import { Category } from './category';
 
@@ -8,13 +8,17 @@ import { Category } from './category';
   styleUrls: ['./videos.component.css']
 })
 export class VideosComponent implements OnInit {
+  @Input () selectMode:boolean=false;
   categories:Category[];
   videos:Video[];
   page=1;
+  @Output() videoSelected= new EventEmitter<Video>();
   nombreVideo=30;
   pages:number[];
+  loading=false;
   constructor() 
   {
+    
     let i=1
     let nombrepages=Math.floor(this.nombreVideo/9)
     console.log(nombrepages)
@@ -28,6 +32,7 @@ export class VideosComponent implements OnInit {
     let video=new Video();
     video.titre="Some quick example text to build on the card title and make up the bulk of the card's content.";
     video.path="http://localhost:8080/videos1"
+    video.id=1;
     this.videos.push(video);
     this.videos.push(video);
     this.videos.push(video);
@@ -95,7 +100,21 @@ export class VideosComponent implements OnInit {
   ngOnInit(): void {
   }
   catSelected(cat){
+      this.loading=true;
+      setTimeout(
+        ()=>{
+          this.loading=false
+        }
+        ,4000
+      )
+
       console.log(cat)
+     
   }
+  onSelectVideo(id:number){
+        console.log("mmi")
+        this.videoSelected.emit(this.videos[0])
+  }
+  
 
 }
