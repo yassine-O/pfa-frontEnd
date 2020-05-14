@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Video } from './video';
-import { Category } from './category';
+import { Category } from '../category/category.model';
 
 @Component({
   selector: 'app-videos',
@@ -50,41 +50,41 @@ export class VideosComponent implements OnInit {
     let c2=new Category();
     let c3=new Category();
     c1.libelle="programming";
-    c1.id=1;
+    c1.idCategorie=1;
     c2.libelle="finance";
-    c2.id=2;
+    c2.idCategorie=2;
     c3.libelle="marketing"
-    c3.id=3;
+    c3.idCategorie=3;
     c1.libelle="programming";
-    c1.id=1;
+    c1.idCategorie=1;
     c2.libelle="finance";
-    c2.id=2;
+    c2.idCategorie=2;
     c3.libelle="marketing"
-    c3.id=3;
+    c3.idCategorie=3;
     c1.libelle="programming";
-    c1.id=1;
+    c1.idCategorie=1;
     c2.libelle="finance";
-    c2.id=2;
+    c2.idCategorie=2;
     c3.libelle="marketing"
-    c3.id=3;
+    c3.idCategorie=3;
     c1.libelle="programming";
-    c1.id=1;
+    c1.idCategorie=1;
     c2.libelle="finance";
-    c2.id=2;
+    c2.idCategorie=2;
     c3.libelle="marketing"
-    c3.id=3;
+    c3.idCategorie=3;
     c1.libelle="programming";
-    c1.id=1;
+    c1.idCategorie=1;
     c2.libelle="finance";
-    c2.id=2;
+    c2.idCategorie=2;
     c3.libelle="marketing"
-    c3.id=3;
+    c3.idCategorie=3;
     c1.libelle="programming";
-    c1.id=1;
+    c1.idCategorie=1;
     c2.libelle="finance";
-    c2.id=2;
+    c2.idCategorie=2;
     c3.libelle="marketing"
-    c3.id=3;
+    c3.idCategorie=3;
     this.categories.push(c1,c2,c3);
     this.categories.push(c1,c2,c3);
     this.categories.push(c1,c2,c3);

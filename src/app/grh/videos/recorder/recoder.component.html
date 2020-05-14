@@ -1,19 +1,16 @@
-<p><button (click)="start()"
-    *ngIf="notStartedYet" >START RECORDING</button>
-    <button (click)="stop()">STOP RECORDING</button></p>
+<p><button (click)="start()" *ngIf="notStartedYet">START RECORDING</button>
+    <button *ngIf="!notStartedYet&&mediaRecorder.state=='recording'" (click)="stop()">STOP RECORDING</button>
 
- 
+    <button *ngIf="!notStartedYet&&mediaRecorder.state=='inactive'" (click)="reRecord()">ReRecord video</button>
+
+</p>
+
 
 
 <div class="mb-4 embed-responsive embed-responsive-16by9">
-    
-    <video 
 
-[muted]="muted"
-autoplay
-[srcObject]="mediaStream"
-class=" embed-responsive-item"
-></video>
-
-  </div>
-
+    <video *ngIf="!videoRecorded" [muted]="muted" autoplay [srcObject]="mediaStream"
+        class=" embed-responsive-item"
+        controls></video>
+    <video controls [src]="videoURL" *ngIf="videoRecorded"></video>
+</div>

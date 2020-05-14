@@ -54,6 +54,11 @@ const routes: Routes = [
     path:"addTest",
     pathMatch:'full',
     component:AddTestComponent
+  },
+  {
+    path:"addQuestion",
+    pathMatch:'full',
+    component:AddQuestionComponent
   }
 
 ];

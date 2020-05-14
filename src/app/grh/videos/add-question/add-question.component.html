@@ -1,37 +1,103 @@
 <section class="jumbotron text-center">
-    <div class="container">
+    <!-- <div class="container">
         <h1 class="jumbotron-heading">adding videos</h1>
         <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la
             mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années
             1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de
             polices de texte...</p>
-    </div>
+    </div> -->
 </section>
 <div class="container ">
     <div class="row">
-        <div class="col-12 col-sm-12 col-md-3 ">
-            <div class="card bg-light mb-3">
+        <div *ngIf="question.idQuestion!=-1" class="col-12 col-sm-12 col-md-3 ">
+            <div class="card bg-light mb-3 ">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                 </div>
-                <select class="form-control category_block" size=7>
-                    <option class="form-control" value={{category.id}} *ngFor="let category of categories"
-                    (click)="onSelectCategory(category.id)"
-                    
-                    >{{category.libelle}} </option> 
-                    
+                <select class="form-control category_block" size=12>
+                    <option style="word-break:break-all;" class="form-control" value={{category.id}}
+                        *ngFor="let category of categories"
+                        (click)="onSelectCategory(category.idCategorie,category.libelle)">{{category.libelle}} </option>
+
                 </select>
+            </div>
+            <div class="card bg-light mb-3 ">
+                <div class="card-header ">
+
+                    <form #categoryName="ngForm">
+                        <button (click)="saveCategory()" [disabled]="libelle.invalid" class="btn btn-success w-100 mb-3"
+                            type="submit"> add category</button>
+                        <input maxlength="18" [(ngModel)]="category.libelle" (input)="inputLibelle()" #libelle="ngModel"
+                            class="form-control" placeholder="libelle" name="libelle" required>
+
+                        <!-- <div *ngIf="libelle.invalid">
+                            <div class="alert alert-danger" *ngIf="libelle.errors.required">
+                                libelle required
+                            </div>
+                        </div> -->
+
+                    </form>
+
+
+                </div>
             </div>
         </div>
         <div class="col-sm-9 ">
-            <form>
-                <div class="form-group text-center">
-                    <label><strong>choose a categorie</strong> </label>
-                    <input class="form-control diabled" readonly>
+            <div class="text-center">
+                <!-- <button class="btn btn-success w-50"> start recording </button> -->
+                <app-recoder (recordFinish)="recordFinish($event)" recorduration=60
+                    postRequest='http://localhost:8080/question/'></app-recoder>
+
+            </div>
+            <form #questionForm="ngForm" >
+                <div class="form-group text-center" *ngIf="question.idQuestion!=-1">
+                    <label><strong>choose a categorie from the list</strong> </label>
+                    <input name="categorie" #categorie="ngModel" [(ngModel)]="selectedCategory.libelle" required
+                        class="form-control diabled" readonly>
+                    <div class="alert alert-danger" *ngIf="categorie.invalid && categorie.touched">
+                        select categorie
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-center"> Response duration</div>
+                        <input class="form-control-range" [(ngModel)]="question.durationResponse" (ngModelChange)="durationChange()"
+                            type="range" name="du" min="1" max="30" step="1">
+                        <div class="text-center">{{question.durationResponse}} min</div>
+                    </div>
+                    <div>
+
+                        <input maxlength="18" [(ngModel)]="question.titre" #t="ngModel" (ngModelChange)="hh()"
+                            class="form-control" placeholder="Title" name="title" required>
+
+                        <div *ngIf="t.invalid&&(t.touched || t.dirty)">
+                            <div class="alert alert-danger" *ngIf="t.errors.required"> required please</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center"> Description</div>
+                            <input name="description" required #description="ngModel" class="form-control"
+                                minlength="40" maxlength="93" [(ngModel)]="question.description"
+                                (ngModelChange)="durationChange()">
+                            <div *ngIf="description.invalid && (description.dirty)">
+                                <div class="alert alert-danger" *ngIf="description.errors.required">
+                                    description is required
+                                </div>
+                                <div class="alert alert-danger" *ngIf="description.errors.minlength">
+                                    min length is 40
+                                </div>
+                            </div>
+                            <div class="row justify-content-left">
+                                <div class="col-md-6 p-auto pr-0">
+                                    <button 
+                                    (click)="saveVideo()"
+                                    [disabled]="questionForm.invalid"
+                                    class="btn btn-success w-100 mt-4 "> Save</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-               <div class="text-center">
-                   <!-- <button class="btn btn-success w-50"> start recording </button> -->
-                   <app-recoder recorduration=60 postRequest='http://localhost:8080/video'></app-recoder>
-               </div>
+                
             </form>
         </div>
     </div>
