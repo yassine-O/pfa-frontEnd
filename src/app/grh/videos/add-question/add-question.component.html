@@ -13,7 +13,7 @@
             <div class="card bg-light mb-3 ">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                 </div>
-                <select class="form-control category_block" size=12>
+                <select class="form-control category_block" [size]="this.categories.length>12?12:this.categories.length">
                     <option style="word-break:break-all;" class="form-control" value={{category.id}}
                         *ngFor="let category of categories"
                         (click)="onSelectCategory(category.idCategorie,category.libelle)">{{category.libelle}} </option>

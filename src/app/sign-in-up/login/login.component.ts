@@ -3,6 +3,7 @@ import { RegisterForm } from '../register-form';
 import { HttpClient} from '@angular/common/http';
 import {Token} from '../token';
 import { AuthenticationResponse } from './AuthenticationResponse.model';
+import { AuthorizationService } from '../authorization.service';
 
 
 
@@ -17,8 +18,8 @@ export class LoginComponent implements OnInit {
   errorLogin:string=""
   username:string="";
   password:String="";
-  @Output() logginEvent=new EventEmitter()
-  constructor(private http:HttpClient) { }
+  constructor(public http:HttpClient,
+    public authenticationService:AuthorizationService) { }
 
   ngOnInit(): void {
   }
@@ -29,19 +30,8 @@ export class LoginComponent implements OnInit {
   register(){
     
     console.log(this.registerForm)
-    this.http.post<AuthenticationResponse>("http://localhost:8080/save/"+this.registerForm.role,this.registerForm).subscribe(
-      (data)=>{
-        console.log(data)
-        let token=new Token();
-        //extract token from data
-        token.saveToken(data.jwt,"token");
-        console.log(data.role)
-      },
-      (error)=>{
-          console.log(error);
-         this.error=error.error;
-      }
-    )
+    this.authenticationService.register(this.registerForm)
+    
   }
   onLogin(){
     console.log(this.username +this.password)
@@ -53,22 +43,6 @@ export class LoginComponent implements OnInit {
   }
   login(cridentia) {
 
-    this.http.post<AuthenticationResponse>('http://localhost:8080/authenticate', cridentia).subscribe(data => {
-      console.log(data);
-
-      let token: Token = new Token();
-     
-      token.saveToken(data.jwt, "token")
-      this.logginEvent.emit();
-      console.log(data)
-
-    },
-      error => {
-        if (error.status == 401) {
-          this.errorLogin = error.error;
-
-        }
-        console.log(error)
-      })
+   this.authenticationService.authenticate(cridentia); 
   }
 }

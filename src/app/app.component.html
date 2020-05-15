@@ -6,14 +6,14 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     </head>
     <body>
-        <div style="margin: 0;"*ngIf="logged">
-            <app-header [role]="role"></app-header>
-            <router-outlet> </router-outlet>
+        <div style="margin: 0;"*ngIf="authorizationService.logged">
+            <app-header ></app-header>
+            <router-outlet > </router-outlet>
             
             
         </div>
-        <div *ngIf="!logged">
-            <app-login (logginEvent)="loggedIn()"></app-login>
+        <div *ngIf="!authorizationService.logged">
+            <app-login ></app-login>
             
         </div>
     </body>

@@ -54,15 +54,15 @@
 
         </div>
         <div>
-            <div *ngIf="errorLogin!=''" style="margin-top:auto;width:80%;color:red">
-                <span> {{errorLogin}}</span>
+            <div *ngIf="authenticationService.errorLogin!=''" style="margin-top:auto;width:80%;color:red">
+                <span> {{authenticationService.errorLogin}}</span>
         </div>
             <div style="margin-left:1em;">
                 <h2 style="margin-bottom:0;padding-bottom: 0;"> Create an account</h2>
                 <div style="margin-top:0;"> best job market</div>
             </div>
-            <div *ngIf="error!=''" style="margin-top:auto;width:80%;color:red">
-                    <span> {{error}}</span>
+            <div *ngIf="authenticationService.errorRegister!=''" style="margin-top:auto;width:80%;color:red">
+                    <span> {{authenticationService.errorRegister}}</span>
             </div>
             <div style="margin-top:auto;width:80%">
                 <input style="padding:0.5em 0;width:100%;" placeholder="First Name" [(ngModel)]="registerForm.prenom">

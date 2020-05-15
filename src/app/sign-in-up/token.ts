@@ -1,3 +1,8 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+    providedIn: 'root'
+  })
 export class Token {
     
     
@@ -6,6 +11,9 @@ export class Token {
     }
     getToken(name):string{
         return localStorage.getItem(name);
+    }
+    removeToken(token:string){
+        localStorage.removeItem(token)
     }
     
 }

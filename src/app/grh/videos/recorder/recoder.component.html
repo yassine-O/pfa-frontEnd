@@ -1,7 +1,14 @@
-<p><button (click)="start()" *ngIf="notStartedYet">START RECORDING</button>
-    <button *ngIf="!notStartedYet&&mediaRecorder.state=='recording'" (click)="stop()">STOP RECORDING</button>
+<p class="mb-0 bg-dark">
+    <button
+    class="btn btn-success"
+    (click)="start()" *ngIf="notStartedYet">START RECORDING</button>
+    <button 
+    class="btn btn-danger"
+    *ngIf="!notStartedYet&&mediaRecorder.state=='recording'" (click)="stop()">STOP RECORDING</button>
 
-    <button *ngIf="!notStartedYet&&mediaRecorder.state=='inactive'" (click)="reRecord()">ReRecord video</button>
+    <button  
+    class="btn btn-success"
+    *ngIf="!notStartedYet&&mediaRecorder.state=='inactive'" (click)="reRecord()">ReRecord video</button>
 
 </p>
 

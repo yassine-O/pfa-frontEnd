@@ -45,7 +45,8 @@ export class AddQuestionComponent implements OnInit {
      
     this.categoryService.saveCategory(this.category).subscribe(
       (data)=>{
-        console.log(data)
+        this.categories.push(data);
+        this.cdRef.detectChanges();
       },
       (errr)=>{
         console.log(errr)
