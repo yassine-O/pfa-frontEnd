@@ -1,0 +1,37 @@
+<div class="bg-dark text-light" style="height: 10em;">
+    <div class="container pt-4">
+        Lorem ipsum dolor sit amet, consectet
+        ur adipiscing elit. Mauris vehicula et nisl quis venenatis. Nulla facilisi. Sed pharetra metus ut congue
+        finibus. Sed egestas finibus mattis. Curabitur varius aliquet ligula, nec vestibulum erat ultricies vitae. Nam a
+        commodo justo, vitae auctor eros. Mauris facilisis aliquam augue, vitae maximus velit
+        consequat a. Aliquam nec dapibus nunc, eu euismod sem quis.
+        <br>
+        <button *ngIf="!interviewStarted" (click)="startInterview()" class="btn btn-danger mt-4"> start
+            entretien</button>
+    </div>
+
+</div>
+<div *ngIf="interviewStarted&&!interviewFinished" class="container">
+    <div *ngIf="!modeRecording" class="mb-4 embed-responsive embed-responsive-16by9">
+
+        <video controls autoplay
+            (ended)="ended()"
+            src='http://localhost:8080/watch/{{test.questions[actualQuestion].idQuestion}}'></video>
+    </div>
+    <div class="text-center p-auto">
+        <button 
+        *ngIf="!modeRecording"
+        (click)="answer()"
+        class="btn-danger btn mb-4" 
+        style="width: 20em;">Answer</button> 
+    </div>
+    <app-recoder 
+    [recording]="recording"
+    (recordFinish)="nextQuestion($event)"
+    [fileName]="fileName"
+    [postRequest]="postRequest" [recorduration]="test.questions[actualQuestion].durationResponse"
+        *ngIf="modeRecording"></app-recoder>
+</div>
+<div *ngIf="interviewFinished">
+    hhhhhhhhhhhh
+</div>

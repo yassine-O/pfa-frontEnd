@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     let headers={
-      "candidat":["Home","Entretien","Demandes","Profil"],
-      "grh":["Home","Entretien","Question","Annonce","Profil"]
+      "candidat":["Home","Demandes","Profil"],
+      "grh":["Home","Entretien Passé","Testes","Questions","Annonce","Profil"]
     }
     this.headerElement=headers[this.role];
   }

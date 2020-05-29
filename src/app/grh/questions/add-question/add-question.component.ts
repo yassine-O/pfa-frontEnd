@@ -12,7 +12,7 @@ export class AddQuestionComponent implements OnInit {
   category:Category=new Category()
   categories:Category[];
   question:Question=new Question();
-  duration:number=2;
+ // duration:number=2;
   selectedCategory:Category=new Category();
   constructor(private cdRef: ChangeDetectorRef,
     private categoryService:CategoryService) { 

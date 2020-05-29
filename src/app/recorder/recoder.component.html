@@ -1,0 +1,31 @@
+<div class="mb-0 bg-dark text-center">
+    <div
+    class="text-light" 
+    *ngIf="recording=='interview'&&(this.mediaRecorder.state=='inactive')"> will start in {{autoStart}}
+    </div>
+    <div
+    class="text-light" 
+    *ngIf="recorduration!=-1&&this.mediaRecorder.state=='recording'"> will finsh in {{recorduration}}
+    </div>
+    <button
+    class="btn btn-success"
+    (click)="start()" *ngIf="this.mediaRecorder.state=='inactive'&&!videoRecorded">START RECORDING</button>
+    <button 
+    class="btn btn-danger"
+    *ngIf="(this.mediaRecorder.state=='recording')&&!videoRecorded" (click)="stop()">STOP RECORDING</button>
+
+    <button  
+    class="btn btn-success"
+    *ngIf="videoRecorded" (click)="reRecord()">ReRecord video</button>
+
+</div>
+
+
+
+<div class="mb-4 embed-responsive embed-responsive-16by9">
+
+    <video *ngIf="!videoRecorded" [muted]="muted" autoplay [srcObject]="mediaStream"
+        class=" embed-responsive-item"
+        ></video>
+    <video controls [src]="videoURL" *ngIf="videoRecorded"></video>
+</div>

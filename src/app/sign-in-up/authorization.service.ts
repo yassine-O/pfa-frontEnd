@@ -29,14 +29,14 @@ export class AuthorizationService {
   validateAuthentication() {
     let token = this.tokenService.getToken("token");
     if (token) {
-      this.http.post<boolean>("http://localhost:8080/validate", token).subscribe
+      this.http.post<AuthenticationResponse>("http://localhost:8080/validate", token).subscribe
         (
           (data) => {
-            console.log(data);
-            this.logged = data;
+           this.logged = true;
+           this.role=data.role;
           },
           (err) => {
-
+              console.log(err);
           }
         )
     }

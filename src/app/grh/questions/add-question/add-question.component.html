@@ -13,7 +13,8 @@
             <div class="card bg-light mb-3 ">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                 </div>
-                <select class="form-control category_block" [size]="this.categories.length>12?12:this.categories.length">
+                <select class="form-control category_block"
+                    [size]="this.categories.length>12?12:this.categories.length">
                     <option style="word-break:break-all;" class="form-control" value={{category.id}}
                         *ngFor="let category of categories"
                         (click)="onSelectCategory(category.idCategorie,category.libelle)">{{category.libelle}} </option>
@@ -22,7 +23,6 @@
             </div>
             <div class="card bg-light mb-3 ">
                 <div class="card-header ">
-
                     <form #categoryName="ngForm">
                         <button (click)="saveCategory()" [disabled]="libelle.invalid" class="btn btn-success w-100 mb-3"
                             type="submit"> add category</button>
@@ -44,11 +44,11 @@
         <div class="col-sm-9 ">
             <div class="text-center">
                 <!-- <button class="btn btn-success w-50"> start recording </button> -->
-                <app-recoder (recordFinish)="recordFinish($event)" recorduration=60
+                <app-recoder (recordFinish)="recordFinish($event)"
                     postRequest='http://localhost:8080/question/'></app-recoder>
 
             </div>
-            <form #questionForm="ngForm" >
+            <form #questionForm="ngForm">
                 <div class="form-group text-center" *ngIf="question.idQuestion!=-1">
                     <label><strong>choose a categorie from the list</strong> </label>
                     <input name="categorie" #categorie="ngModel" [(ngModel)]="selectedCategory.libelle" required
@@ -59,8 +59,8 @@
 
                     <div class="form-group">
                         <div class="text-center"> Response duration</div>
-                        <input class="form-control-range" [(ngModel)]="question.durationResponse" (ngModelChange)="durationChange()"
-                            type="range" name="du" min="1" max="30" step="1">
+                        <input class="form-control-range" [(ngModel)]="question.durationResponse"
+                            (ngModelChange)="durationChange()" type="range" name="du" min="1" max="30" step="1">
                         <div class="text-center">{{question.durationResponse}} min</div>
                     </div>
                     <div>
@@ -86,10 +86,8 @@
                             </div>
                             <div class="row justify-content-left">
                                 <div class="col-md-6 p-auto pr-0">
-                                    <button 
-                                    (click)="saveVideo()"
-                                    [disabled]="questionForm.invalid"
-                                    class="btn btn-success w-100 mt-4 "> Save</button>
+                                    <button (click)="saveVideo()" [disabled]="questionForm.invalid"
+                                        class="btn btn-success w-100 mt-4 "> Save</button>
                                 </div>
                             </div>
 
@@ -97,7 +95,7 @@
                     </div>
 
                 </div>
-                
+
             </form>
         </div>
     </div>

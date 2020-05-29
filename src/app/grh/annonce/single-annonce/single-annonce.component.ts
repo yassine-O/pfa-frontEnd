@@ -28,8 +28,17 @@ export class SingleAnnonceComponent implements OnInit {
    }
   fetchAnnonceById(){
       let id=this.activeRoute.snapshot.paramMap.get("id");
-      console.log(id)
-      this.loading=false
+      this.annonceService.getAnnonceById(id).subscribe(
+        (data)=>{
+          this.annonce=data;
+          this.loading=false;
+        },
+        (err)=>{
+            console.log("i ma heree")
+            this.route.navigateByUrl("")
+        }
+      )
+      
   }
   ngOnInit(): void {
     
@@ -45,6 +54,9 @@ export class SingleAnnonceComponent implements OnInit {
     this.route.navigate(["/addAnnonce"],{
       state:this.annonce
     })
+  }
+  addTest(){
+    this.route.navigate(["addTest"])
   }
 
   

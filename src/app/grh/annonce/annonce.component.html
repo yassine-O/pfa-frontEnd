@@ -1,132 +1,136 @@
 <section class="articles py-4">
     <div class="container">
-        <div class="ghaction  row mb-3 ">
+        <!-- <div class="ghaction  row mb-3 ">
             <div class="col-lg-8">
                 <div class="row ml-0">
-                    <div class="col-md-5 ml-0">
-                        <button (click)="addAnnonce()" class="btn btn-link">
+                    <div class="ml-0 text-center">
+                         <button (click)="addAnnonce()" class="btn btn-link">
                             add annonce
                         </button>
                         <button class="btn btn-link">
                             sort by date
                         </button>
                     </div>
-                    <input class="col-sm-6 col-md-4">
+                     <input class="col-sm-6 col-md-4">
 
-                    <button class="btn-success col-sm-2 col-md-2  ml-0 mr-0">search</button>
+                    <button class="btn-success col-sm-2 col-md-2  ml-0 mr-0">search</button> 
                 </div>
 
 
             </div>
-
-
-
-        </div>
-       <div>
+        </div> -->
+        <div>
             <div class="row">
-            <div class="col-lg-8 ">
-                <div *ngIf="loading">
+                <div class="col-lg-8 ">
+                    <div *ngIf="loading" class="h-100">
                         <app-spinner></app-spinner>
-                </div>
-               <div *ngIf="!loading">
-                <div class="article mb-3 shadow" *ngFor="let annonce of annonces">
-                    <div class="row">
-                        <div style="margin:auto;" class="col-md-3 info">
-                            <p style="text-align: center;"><strong> Contrat:</strong> {{annonce.typeDeContrat}}</p>
-                            <p style="text-align: center;">
-                                <strong>salaire:</strong>{{annonce.salaireMin}}-{{annonce.salaireMax}}</p>
-                            <p style="text-align: center;"> <strong>ville :</strong>{{annonce.ville}}</p>
+                    </div>
+                    <div *ngIf="!loading">
+                        <div class="article mb-3 shadow" *ngFor="let annonce of annonces">
+                            <div class="row">
+                                <div style="margin:auto;" class="col-md-3 info">
+                                    <p style="text-align: center;"><strong> Contrat:</strong> {{annonce.typeDeContrat}}
+                                    </p>
+                                    <p style="text-align: center;">
+                                        <strong>salaire:</strong>{{annonce.salaireMin}}-{{annonce.salaireMax}}</p>
+                                    <p style="text-align: center;"> <strong>ville :</strong>{{annonce.ville}}</p>
+                                </div>
+                                <div class="col-md-9" style="word-break:break-all;">
+                                    <strong> {{annonce.title}}</strong>
+                                    <a class=" fa py-4 w-100">
+                                        <i class="fas fa-calendar-alt"></i> {{annonce.date|date}}
+                                    </a>
+                                    <p> {{getFirst247(annonce.description)}} <button class="btn btn-link"
+                                            (click)="goToAnnonce(annonce.idAnnonce)"> more
+                                            details</button></p>
+
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-md-9" style="word-break:break-all;">
-                            <strong> {{annonce.title}}</strong>
-                            <a class=" fa py-4 w-100">
-                                <i class="fas fa-calendar-alt"></i> {{annonce.date|date}}
+                        <div class="text-center"> <button class="col-md-6 col-sm-12 btn btn-success"
+                                (click)="addAnnonce()">add annonce </button></div>
+                    </div>
+
+                    <div *ngIf="totalPages>1" class="col-12">
+                        <nav aria-label="...">
+                            <ul class="pagination" style="display: flex;justify-content: center;">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item" *ngFor="let page of pages;"><button (click)="goToPage(page)"
+                                        class="page-link" href="#">{{page}}</button></li>
+
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-4  ">
+                    <div class=" img-fluid w-100">
+                        <img src="assets/hire.jpg">
+                    </div>
+                    <div class="img img-fluid">
+                        <img src="assets/hire.jpg">
+                    </div>
+                    <!-- social networks -->
+                    <div class="row ">
+                        <div class="col-sm-4 text-center">
+                            <a class=" fa social-link py-4 w-100">
+                                <i class="fab fa-facebook-official"></i>
                             </a>
-                            <p> {{getFirst247(annonce.description)}} <button class="btn btn-link"(click)="goToAnnonce(annonce.idAnnonce)" > more
-                                    details</button></p>
-
                         </div>
-                    </div>
+                        <!-- <div class="col-sm-4 text-center">
 
-                </div>
-               </div>
-                <div *ngIf="totalPages>1" class="col-12">
-                    <nav aria-label="...">
-                        <ul class="pagination" style="display: flex;justify-content: center;">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item" *ngFor="let page of pages;"><button (click)="goToPage(page)" class="page-link" href="#">{{page}}</button></li>
-        
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="col-lg-4  ">
-                <div class=" img-fluid w-100">
-                    <img src="assets/hire.jpg">
-                </div>
-                <div class="img img-fluid">
-                    <img src="assets/hire.jpg">
-                </div>
-                <!-- social networks -->
-                <div class="row ">
-                    <div class="col-sm-4 text-center">
-                        <a class=" fa social-link py-4 w-100">
-                            <i class="fab fa-facebook-official"></i>
-                        </a>
-                    </div>
-                    <div class="col-sm-4 text-center">
+                            <a class=" fa social-link py-4 w-100">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <a class="fa social-link py-4 w-100">
+                                <i class="fab fa-twitter"></i>
+                            </a>
 
-                        <a class=" fa social-link py-4 w-100">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                        </div> -->
                     </div>
-                    <div class="col-sm-4 text-center">
-                        <a class="fa social-link py-4 w-100">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                    <!-- <div class="badge w-100">
+                        <p class="badge-link text-center">
+                            <a> Web Development</a>
+                        </p>
+                        <p>
+                            <a> web design</a>
+                        </p>
+                        <p>
+                            <a> ingenieur electrique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> environnement</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
+                        <p>
+                            <a> ingenieur mecanique</a>
+                        </p>
 
-                    </div>
-                </div>
-                <div class="badge w-100">
-                    <p class="badge-link text-center">
-                        <a> Web Development</a>
-                    </p>
-                    <p>
-                        <a> web design</a>
-                    </p>
-                    <p>
-                        <a> ingenieur electrique</a>
-                    </p>
-                    <p>
-                        <a> ingenieur mecanique</a>
-                    </p>
-                    <p>
-                        <a> environnement</a>
-                    </p>
-                    <p>
-                        <a> ingenieur mecanique</a>
-                    </p>
-                    <p>
-                        <a> ingenieur mecanique</a>
-                    </p>
-                    <p>
-                        <a> ingenieur mecanique</a>
-                    </p>
-                    <p>
-                        <a> ingenieur mecanique</a>
-                    </p>
+                    </div> -->
 
                 </div>
 
             </div>
-
+            
         </div>
-       </div>
 
     </div>
 
