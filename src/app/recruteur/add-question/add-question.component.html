@@ -1,0 +1,8 @@
+<button (click)="recorder.start()" *ngIf="!recorder.isRecording">enregistrer</button>
+<button (click)="recorder.stop();onStop()" *ngIf="recorder.isRecording">stop</button>
+
+<app-recorder (videoData)="getVideoData($event)" #recorder></app-recorder>
+
+<div *ngIf="isFinished">
+    <video [src]="videoURL" controls></video>
+</div>
