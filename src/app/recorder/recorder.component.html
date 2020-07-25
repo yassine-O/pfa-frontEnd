@@ -1,1 +1,11 @@
-<video [srcObject]="mediaStream" autoplay></video>
+<!-- <video [srcObject]="mediaStream" autoplay></video> -->
+
+
+<div class="c-video">
+    <div class="REC"><strong>REC</strong><span></span></div>
+    <video #video class="video">
+    </video>
+    <button (click)="start()" class="record"><img src="../../assets/video-solid.svg" alt=""></button>
+</div>
+<button (click)="stop()">stop</button>
+<button (click)="strem()">strem</button>

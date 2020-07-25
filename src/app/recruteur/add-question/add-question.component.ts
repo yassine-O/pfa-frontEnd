@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -12,7 +12,7 @@ export class AddQuestionComponent implements OnInit {
   videoURL = null;
   isFinished: boolean = false;
 
-  constructor(private dom: DomSanitizer) { }
+  constructor(private dom: DomSanitizer, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
@@ -28,7 +28,7 @@ export class AddQuestionComponent implements OnInit {
     let blob = new Blob(this.chunks, { 'type' : 'video/mp4;' });
     let u =URL.createObjectURL(blob);
     this.videoURL = this.dom.bypassSecurityTrustUrl(u);
-    console.log(this.videoURL);
+    this.cdRef.detectChanges();
   }
 
   onStop(){

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 
 declare const MediaRecorder: any;
 
@@ -7,20 +7,15 @@ declare const MediaRecorder: any;
   templateUrl: './recorder.component.html',
   styleUrls: ['./recorder.component.css']
 })
-export class RecorderComponent implements OnInit {
-
+export class RecorderComponent implements OnInit,AfterViewInit {
+  chunks = [];
+  @ViewChild('video') video;
   mediaStream: MediaStream = null;
   mediaRecorder: any;
   isRecording: boolean = false;
   @Output() videoData = new EventEmitter();
-  constraintObj = { 
-    audio: false, 
-    video: { 
-        facingMode: "user", 
-        width: { min: 640, ideal: 1280, max: 1920 },
-        height: { min: 480, ideal: 720, max: 1080 } 
-    } 
-  };
+  
+  videoURL: any;
 
   constructor() { }
 
@@ -28,7 +23,14 @@ export class RecorderComponent implements OnInit {
     this.userMedia();
   }
 
-  userMedia(){
+  ngAfterViewInit(): void {
+    let video:HTMLVideoElement = this.video.nativeElement;
+    video.muted = false;
+    video.controls = true;
+    video.autoplay = false;
+  }
+
+  /* userMedia(){
     navigator.mediaDevices.getUserMedia(this.constraintObj)
       .then( mediaStreamObj => {
         this.mediaStream = mediaStreamObj;
@@ -39,9 +41,44 @@ export class RecorderComponent implements OnInit {
       .catch(function (er) {
         console.log(er);
       })
+   }*/
+
+  userMedia(){
+    let constraintObj = { 
+      audio: false, 
+      video: { 
+          facingMode: "user", 
+          width: { min: 640, ideal: 1280, max: 1920 },
+          height: { min: 480, ideal: 720, max: 1080 } 
+      } 
+    };
+    navigator.mediaDevices
+      .getUserMedia(constraintObj)
+      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+  }
+
+  successCallback(stream: MediaStream){
+    let video: HTMLVideoElement = this.video.nativeElement;
+    this.mediaStream = stream;
+    this.mediaRecorder = new MediaRecorder(this.mediaStream);
+    video.srcObject  = stream;
+    this.toggleControls();
+    this.mediaRecorder.ondataavailable = this.dataAvailable.bind(this);
+  }
+
+  errorCallback(err){
+    console.log(err);
+  }
+
+  toggleControls() {
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.muted = !video.muted;
+    video.controls = !video.controls;
+    video.autoplay = !video.autoplay;
   }
 
   dataAvailable(ev){
+    this.chunks.push(ev.data);
     this.videoData.emit(ev);
   }
 
@@ -52,9 +89,21 @@ export class RecorderComponent implements OnInit {
   }
 
   stop(){
-    this.mediaRecorder.stop();
     this.isRecording = false;
+    this.mediaRecorder.stop();
     console.log(this.mediaRecorder.state);
+    let stream = this.mediaStream;
+    stream.getAudioTracks().forEach(track => track.stop());
+    stream.getVideoTracks().forEach(track => track.stop());
+    this.toggleControls();
+  }
+
+  strem(){
+    let blob = new Blob(this.chunks, { 'type' : 'video/mp4;' });
+    let videoURL =URL.createObjectURL(blob);
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.srcObject=null;
+    video.src = videoURL;
   }
 
 }
