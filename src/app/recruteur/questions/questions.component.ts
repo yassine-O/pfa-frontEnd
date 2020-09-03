@@ -17,11 +17,13 @@ export class QuestionsComponent implements OnInit {
   selectedCategory: number;
   questions: Question[];
   testQuestions :Question[] = [];
-  iDsOfSelectedQuestion:Array<number>=[];
+  iDsOfSelectedQuestion:Array<any>=[];
+  description :string = "";
 
   constructor(private qstService: QuestionService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.listCategory();
   }
 
   listCategory() {
@@ -42,6 +44,7 @@ export class QuestionsComponent implements OnInit {
         (questions)=>this.questions=questions
       )
   }
+
   change(id){
     this.selectedCategory=id;
     this.listQuestion();
@@ -54,29 +57,44 @@ export class QuestionsComponent implements OnInit {
     config.autoFocus=true;
     config.width="80%";
     config.panelClass="custom-modalbox"
-    config.data={idQuestion:idQuestion}
+    config.data={path:"questions/"+idQuestion}
     const dialogRef = this.dialog.open(VideoComponent,config);
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.questions, event.previousIndex, event.currentIndex);
-    console.log(this.questions)
+    moveItemInArray(this.testQuestions, event.previousIndex, event.currentIndex);
   }
 
-  remove(index:number,idQuestion:number){
-    
+  remove(index:number){
     this.testQuestions.splice(index, 1);
-  
   }
 
   selectVideo(question){
     this.testQuestions.push(question);
-    
-    console.log(this.testQuestions)
   }
 
   isSelected(idQuestion):boolean{
       return this.testQuestions.some(qst=>qst.id===idQuestion)
+  }
+
+  onAddTest(){
+    if(this.testQuestions.length == 0){
+      alert("veuillez selectionner au moins une question !")
+    }
+    else if(this.description.trim()==""){
+      alert("Veuillez insérer une description");
+    }
+    else{
+      this.iDsOfSelectedQuestion = this.testQuestions.map((qst)=>{
+        return {id:qst.id};
+      });
+      this.qstService.addTest(this.description, this.iDsOfSelectedQuestion)
+      .subscribe(res=>{
+
+      },err=>{
+
+      });
+    }
   }
 
 }

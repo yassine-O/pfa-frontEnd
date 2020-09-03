@@ -1,11 +1,13 @@
-<!-- <video [srcObject]="mediaStream" autoplay></video> -->
-
-
 <div class="c-video">
-    <div class="REC"><strong>REC</strong><span></span></div>
+    <div *ngIf="status=='RECORDING'" class="REC"><strong>REC</strong> <span></span></div>
     <video #video class="video">
     </video>
-    <button (click)="start()" class="record"><img src="../../assets/video-solid.svg" alt=""></button>
+    <button *ngIf="status=='PERMISSION'" class="record" (click)="userMedia()">
+        <img src="../../assets/perm_camera_mic-24px.svg" alt="">
+    </button>
+    <button *ngIf="status=='SUCCESS'" (click)="start()" class="record">
+        <img src="../../assets/record.svg" alt="">
+    </button>
 </div>
 <button (click)="stop()">stop</button>
-<button (click)="strem()">strem</button>
+<button (click)="stream()">stream</button>

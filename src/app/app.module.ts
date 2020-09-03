@@ -17,6 +17,12 @@ import { QuestionsComponent } from './recruteur/questions/questions.component';
 import { VideoComponent } from './video/video.component';
 import { RequestInterceptorService } from './service/request-interceptor.service';
 import { AddQuestionComponent } from './recruteur/add-question/add-question.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { OffresComponent } from './candidat/offres/offres.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { TimeAgoPipe } from './pipe/time-ago-pipe';
 
 @NgModule({
   declarations: [
@@ -29,13 +35,19 @@ import { AddQuestionComponent } from './recruteur/add-question/add-question.comp
     QuestionsComponent,
     VideoComponent,
     AddQuestionComponent,
+    OffresComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    DragDropModule,
+    CKEditorModule,
+    MatTabsModule
   ],
   providers: [AuthenticationService,
           { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }],

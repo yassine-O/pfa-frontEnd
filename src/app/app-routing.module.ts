@@ -6,6 +6,7 @@ import { NewAnnonceComponent } from './recruteur/new-annonce/new-annonce.compone
 import { RecorderComponent } from './recorder/recorder.component';
 import { QuestionsComponent } from './recruteur/questions/questions.component';
 import { AddQuestionComponent } from './recruteur/add-question/add-question.component';
+import { OffresComponent } from './candidat/offres/offres.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path : 'new-annonce', component : NewAnnonceComponent},
   {path : 'recorder', component : RecorderComponent},
   {path : 'MesQuestions', component : QuestionsComponent},
-  {path : 'enregistrer-une-question', component : AddQuestionComponent}
+  {path : 'enregistrer-une-question', component : AddQuestionComponent},
+  {path : 'offresEmploi', component : OffresComponent}
 ];
 
 @NgModule({

@@ -12,7 +12,7 @@ export class VideoComponent implements OnInit {
 
   constructor(private dialogRef:MatDialogRef<VideoComponent>,@Inject(MAT_DIALOG_DATA) data) {
     console.log(data);
-    this.src="http://localhost:8080/watch/"+data.idQuestion
+    this.src="http://localhost:8080/watch/"+data.path;
    }
 
   ngOnInit(): void {

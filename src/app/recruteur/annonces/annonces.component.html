@@ -1,66 +1,79 @@
-<div class="container">
-    <div class="accordion" id="accordionExample">
-       <div class="card">
-         <div class="card-header" id="headingOne">
-           <h5 class="mb-0">
-             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-               Collapsible Group Item #1
-             </button>
-           </h5>
-         </div>
-     
-         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-           <div class="card-body">
-             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-           </div>
-         </div>
-       </div>
-       <div class="card">
-         <div class="card-header" id="headingTwo">
-           <h5 class="mb-0">
-             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-               Collapsible Group Item #2
-             </button>
-           </h5>
-         </div>
-         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-           <div class="card-body">
-             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Cras justo odio
-                  <span class="badge badge-primary badge-pill">14</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Dapibus ac facilisis in
-                  <span class="badge badge-primary badge-pill">2</span>
-                </li>
-                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                  Morbi leo risus
-                  <span class="badge badge-primary badge-pill">1</span>
-                </li>
+<div class="container mt-5" *ngIf="annonces">
+  <div class="accordion" id="accordionExample">
+    <div class="card" *ngFor="let annonce of annonces">
+      <div class="card-header" id="heading{{annonce.id}}">
+        <h5 class="mb-0">
+          <div class="btn btn-link list-group-item-action" type="button" data-toggle="collapse"
+            attr.data-target="#body{{annonce.id}}" [attr.aria-expanded]="false" attr.aria-controls="body{{annonce.id}}">
+            <strong>{{annonce.titrePoste}}</strong>
+            <span class="pull-right">Statut : <strong>{{annonce.statut}}</strong></span>
+          </div>
+        </h5>
+      </div>
+      <div id="body{{annonce.id}}" class="collapse" attr.aria-labelledby="heading{{annonce.id}}"
+        data-parent="#accordionExample">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <form #f="ngForm" (ngSubmit)="onPublish(f.value)" *ngIf="annonce.statut=='Nouvelle'; else Teststatus" ngNativeValidate>
+                <div class="text-danger mb-2">Cette annonce n'est pas encore publiéé, veuillez d'abord choisir un test !</div>
+                <div class="form-group row">
+                  <label for="test{{annonce.id}}" class="col-sm-2 col-form-label">Test</label>
+                  <div class="col-sm-10">
+                    <select id="test{{annonce.id}}" class="form-control" name="idTest" ngModel required>
+                      <option value="{{test.id}}" *ngFor="let test of tests">{{test.description}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <input type="hidden" name="idAnnonce" ngModel="{{annonce.id}}">
+                    <button type="submit" class="btn btn-primary">Publier</button>
+                  </div>
+                </div>
+              </form>
+              <ng-template #Teststatus>
+                <div class="form-group row">
+                  <label for="datePublication{{annonce.id}}" class="col-sm-6 col-form-label">Date de publication</label>
+                  <div class="col-sm-6">
+                    <input type="text" id="datePublication{{annonce.id}}" class="form-control" value="{{annonce.datePublication}}" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="test{{annonce.id}}" class="col-sm-6 col-form-label">Test</label>
+                  <div class="col-sm-6">
+                    <input type="text" id="test{{annonce.id}}" class="form-control" value="test1" readonly>
+                  </div>
+                </div>
+              </ng-template>
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+              moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+            </div>
+            <div class="col-md-6">
+              <ul class="list-group">
+                <a href="">
+                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Nouvelles demandes
+                    <span class="badge badge-primary badge-pill">14</span>
+                  </li>
+                </a>
+                <a href="">
+                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Demndes acceptées
+                    <span class="badge badge-primary badge-pill">2</span>
+                  </li>
+                </a>
+                <a href="">
+                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Entretiens
+                    <span class="badge badge-primary badge-pill">1</span>
+                  </li>
+                </a>
               </ul>
-           </div>
-         </div>
-       </div>
-       <div class="card">
-         <div class="card-header" id="headingThree">
-           <h5 class="mb-0">
-             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-               Collapsible Group Item #3
-             </button>
-           </h5>
-         </div>
-         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-           <div class="card-body">
-             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-             <ul class="list-group list-group-flush">
-                <li class="list-group-item">One</li>
-                <li class="list-group-item">Two</li>
-                <li class="list-group-item">Three</li>
-              </ul>
-           </div>
-         </div>
-       </div>
-     </div>
- </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

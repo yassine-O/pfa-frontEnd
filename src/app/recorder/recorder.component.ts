@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit, Input } from '@angular/core';
 
 declare const MediaRecorder: any;
 
@@ -8,20 +8,19 @@ declare const MediaRecorder: any;
   styleUrls: ['./recorder.component.css']
 })
 export class RecorderComponent implements OnInit,AfterViewInit {
-  chunks = [];
+  @Input() chunks = [];
   @ViewChild('video') video;
   mediaStream: MediaStream = null;
   mediaRecorder: any;
   isRecording: boolean = false;
+  status: string = "PERMISSION";
   @Output() videoData = new EventEmitter();
   
   videoURL: any;
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.userMedia();
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     let video:HTMLVideoElement = this.video.nativeElement;
@@ -58,6 +57,7 @@ export class RecorderComponent implements OnInit,AfterViewInit {
   }
 
   successCallback(stream: MediaStream){
+    this.status = "SUCCESS";
     let video: HTMLVideoElement = this.video.nativeElement;
     this.mediaStream = stream;
     this.mediaRecorder = new MediaRecorder(this.mediaStream);
@@ -78,17 +78,18 @@ export class RecorderComponent implements OnInit,AfterViewInit {
   }
 
   dataAvailable(ev){
-    this.chunks.push(ev.data);
     this.videoData.emit(ev);
   }
 
   start(){
+    this.status = "RECORDING";
     this.isRecording = true;
     this.mediaRecorder.start(5 * 1000);
     console.log(this.mediaRecorder.state);
   }
 
   stop(){
+    this.status = "FINISHED";
     this.isRecording = false;
     this.mediaRecorder.stop();
     console.log(this.mediaRecorder.state);
@@ -98,7 +99,8 @@ export class RecorderComponent implements OnInit,AfterViewInit {
     this.toggleControls();
   }
 
-  strem(){
+  stream(){
+    //this.status = "REPLAY";
     let blob = new Blob(this.chunks, { 'type' : 'video/mp4;' });
     let videoURL =URL.createObjectURL(blob);
     let video: HTMLVideoElement = this.video.nativeElement;

@@ -1,0 +1,60 @@
+<div class="ml-4 mr-4">
+    <div class="row ">
+        <div #listeAnnonces class="col-md-4 h-100 p-0">
+            <div #commentDiv class="annonces ">
+                <div (click)="clicked(index)" class="list" *ngFor="let annonce of annonces;let index=index">
+                    <div class="col-md-8 info">
+                        <div>
+                            <strong>
+                                {{annonce.titrePoste}}
+                            </strong>
+                        </div>
+                        <div>{{annonce.entreprise.nom}}</div>
+                        <div> {{annonce.lieuPoste}}</div>
+                    </div>
+                    <div class="col-md-4 date">
+                        {{annonce.datePublication | timeAgo}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div #selecteddAnnonce class="col-md-8 " *ngIf="selectedAnnonce">
+            <div class="content-header m-3">
+                <div>
+                    <div class="col-sm-8 info">
+                        <div>
+                            <strong>
+                                {{selectedAnnonce.titrePoste}},
+                            </strong>
+                            {{selectedAnnonce.entreprise.nom}}-
+                        
+                            {{selectedAnnonce.lieuPoste}}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="p-2"> Postuler</button>
+                </div>
+            </div>
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab label="Description">{{selectedAnnonce.descriptionPoste}}</mat-tab>
+                <mat-tab label="Infos clés">
+                    <strong>{{selectedAnnonce.entreprise.nom}}</strong><br><br>
+                    Lieu de poste <br> <Strong>{{selectedAnnonce.lieuPoste}}</Strong><br><br>
+                    Type de contrat <br> <Strong>{{selectedAnnonce.typeContrat}}</Strong><br><br>
+                    Publié <br> <Strong>{{selectedAnnonce.datePublication | timeAgo}}</Strong><br><br>
+                    Domaine d'activité <br> <Strong>{{selectedAnnonce.domaine}}</Strong><br><br>
+                    Niveau d'études <br> <Strong>{{selectedAnnonce.niveauEtude}}</Strong><br><br>
+                    Experience<br> <Strong>{{selectedAnnonce.experience}}</Strong><br><br>
+                </mat-tab>
+                <mat-tab label="Entreprise">
+                    <strong>{{selectedAnnonce.entreprise.nom}}</strong><br><br>
+                    Secteur d'activité <br> <Strong>{{selectedAnnonce.entreprise.secteurActivite}}</Strong><br><br>
+                    Siège social <br> <Strong>{{selectedAnnonce.entreprise.siegeSocial}}</Strong><br><br>
+                    Fondée en <br> <Strong>{{selectedAnnonce.entreprise.dateFondation}}</Strong><br><br>
+                    <a href="{{selectedAnnonce.entreprise.siteWeb}}">Site web de l'entreprise</a>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

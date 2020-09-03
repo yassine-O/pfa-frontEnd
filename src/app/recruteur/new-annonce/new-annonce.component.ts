@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Annonce } from 'src/app/model/annonce';
+import { AnnonceService } from 'src/app/service/annonce.service';
 
 @Component({
   selector: 'app-new-annonce',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewAnnonceComponent implements OnInit {
 
-  constructor() { }
+  public Editor = ClassicEditor;
+  public config = {removePlugins: ['MediaEmbed','ImageUpload'] };
+  annonce : Annonce = new Annonce();
 
-  ngOnInit(): void {
+  constructor(private annonceService :AnnonceService) { }
+
+  ngOnInit(): void { }
+  
+  onAddAnnonce(){
+    if(this.annonce.descriptionPoste.trim()==""){
+      alert("Veuillez saisir une description pour le poste");
+    }
+    else{
+      this.annonceService.addAnnonce(this.annonce)
+        .subscribe(res=>{
+
+        },err=>{
+
+        });
+    }
   }
 
 }

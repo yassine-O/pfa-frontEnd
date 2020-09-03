@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { QuestionService } from 'src/app/service/question.service';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-add-question',
@@ -8,31 +9,55 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class AddQuestionComponent implements OnInit {
 
+  @ViewChild('recorder') recorder;
   chunks = [];
   videoURL = null;
-  isFinished: boolean = false;
+  categories :Category[];
 
-  constructor(private dom: DomSanitizer, private cdRef: ChangeDetectorRef) { }
+
+  constructor(private qstService : QuestionService) { }
 
   ngOnInit(): void {
+    this.onGetCategories();
   }
 
   getVideoData(ev){
     this.chunks.push(ev.data);
-    if(this.isFinished){
-      this.stream();
+  }
+
+  onAddCategorie(data){
+    this.qstService.addCategory(data.libelle).subscribe(res=>{
+
+    }, err=>{
+
+    });
+  }
+
+  onGetCategories(){
+    this.qstService.getCategories().subscribe(res=>{
+      this.categories = res;
+    }, err=>{
+
+    });
+  }
+
+  onAddQuestion(data){
+    let status = this.recorder.status;
+    if(status == "FINISHED"){
+      let blob = new Blob(this.chunks, { type : 'video/mp4' });
+      let formData = new FormData();
+      formData.append("video", blob);
+      formData.append("titre", data.titre);
+      this.qstService.addQuestion(data.categorie, formData)
+        .subscribe(res=>{
+          
+        },err=>{
+
+        });
     }
-  }
-
-  stream(){
-    let blob = new Blob(this.chunks, { 'type' : 'video/mp4;' });
-    let u =URL.createObjectURL(blob);
-    this.videoURL = this.dom.bypassSecurityTrustUrl(u);
-    this.cdRef.detectChanges();
-  }
-
-  onStop(){
-    this.isFinished = true;
+    else{
+      alert("Veuillez d'abord enregistrer votre qestion");
+    }
   }
 
 }

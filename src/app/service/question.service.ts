@@ -8,13 +8,32 @@ import { Question } from '../model/question';
 })
 export class QuestionService {
 
-  constructor(private http: HttpClient) { }
+  host = "http://localhost:8080/recruteur/";
+
+  constructor(public http: HttpClient) { }
 
   getCategories(){
-    return this.http.get<Category[]>("http://localhost:8080/recruteurs/categories")
+    return this.http.get<Category[]>(this.host+"categories")
   }
+
   getQuestions(id){
-    return this.http.get<Question[]>("http://localhost:8080/recruteurs/categories/"+id+"/questions")
+    return this.http.get<Question[]>(this.host+"categories/"+id+"/questions")
+  }
+
+  addCategory(libelle){
+    return this.http.post(this.host, libelle);
+  }
+
+  addQuestion(idCategore:Number, formData){
+    return this.http.post(this.host+"categories/"+idCategore+"/questions", formData);
+  }
+
+  addTest(description:string, questions:Array<Question>){
+    let data = {
+      description:description,
+      questions:questions
+    }
+    return this.http.post(this.host+"tests",data);
   }
 
 }

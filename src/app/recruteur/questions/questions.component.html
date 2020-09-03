@@ -2,15 +2,9 @@
     <div class="row  ">
         <div class="form-group col-md-4">
             <label for="niveauEtude">Niveau d'études</label>
-            <select   
-            (change)="change($event.target.value)"
-            class="form-control" name="niveauEtude">                
-                <option 
-                    value={{category.idCategorie}} 
-                    *ngFor="let category of categories"
-                    >{{category.libelle}}
-                </option>
-            </select> 
+            <select (change)="change($event.target.value)" class="form-control" name="niveauEtude">
+                <option value={{category.id}} *ngFor="let category of categories">{{category.libelle}}</option>
+            </select>
         </div>
     </div>
     <div class="row ">
@@ -18,26 +12,23 @@
             <div class="row mb-4" *ngFor="let question of questions">
                 <div class="row no-gutters bg-light position-relative">
                     <div class="col-lg-4 mb-md-0 p-md-4">
-                        <a (click)="open(question.idQuestion)" class="stretched-link w-100" style="cursor: pointer;">
-                            <video class="w-100" src='http://localhost:8080/watch/{{question.idQuestion}}'>
-                            </video>
+                        <a (click)="open(question.id)" class="stretched-link w-100" style="cursor: pointer;">
+                            <video class="w-100" src='http://localhost:8080/watch/questions/{{question.id}}'></video>
                         </a>
                     </div>
                     <div class="col-lg-8  position-static p-4 ">
                         <div class="row ">
                             <div class="col-sm-6 mb-1">
                                 <h5 class="mt-0 h-50">{{question.titre}}</h5>
-                                <div >
+                                <div>
                                     <strong> Durée:</strong> {{question.durationResponse}} min
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <button (click)="selectVideo(question)" 
-                                class="btn btn-primary w-100 d-bloc mb-2"
-                                    [disabled]="isSelected(question.idQuestion)">select</button>
-                                    <button (click)="selectVideo(question)" class="btn btn-primary w-100 d-bloc"
-                                    [disabled]="isSelected(question.idQuestion)">select</button>
-                                   
+                                <button (click)="selectVideo(question)" class="btn btn-primary w-100 d-bloc mb-2"
+                                    [disabled]="isSelected(question.id)">select</button>
+                                <button (click)="selectVideo(question)" class="btn btn-primary w-100 d-bloc"
+                                    [disabled]="isSelected(question.id)">select</button>
                             </div>
                         </div>
                     </div>
@@ -51,10 +42,16 @@
                     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
                         <div class="example-box" *ngFor="let question of testQuestions,let index=index" cdkDrag>
                             {{index+1+" "}})
-                            {{question.titre}} <button class="btn btn-link"
-                                (click)="remove(index,question.idQuestion)"><i class='fas fa-trash-alt'></i></button>
+                            {{question.titre}} <button class="btn btn-link" (click)="remove(index)">
+                                <img src="../../../assets/delete.svg" alt="">
+                            </button>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="description">Description :</label>
+                        <input type="text" class="form-control" id="description" name="description" [(ngModel)]="description"/>
+                    </div>
+                    <button (click)="onAddTest()">Créer</button>
                 </div>
             </div>
         </div>
